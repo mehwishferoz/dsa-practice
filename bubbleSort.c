@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<time.h>
-#define n 80000
+#define n 20
 
 void swap(int arr[10], int i, int j)
 {
@@ -10,10 +9,16 @@ void swap(int arr[10], int i, int j)
     arr[j] = temp;
 }
 
+void display(int A[10])
+{
+    for(int i=0;i<10;i++)
+    {
+        printf("%d ", A[i]);
+    }
+}
+
 void bubbleSort(int arr[10])
 {
-    clock_t start, end;
-    start = clock();
     int flag = 0;
     for (int i = 0; i < n - 1; i++)
     {
@@ -28,20 +33,17 @@ void bubbleSort(int arr[10])
         if (!flag)
             break;
     }
-    end = clock();
-    double duration = ((double)(end - start)/CLOCKS_PER_SEC);
-    printf("Time: %g", duration);
 }
 
 int main()
 {
-    clock_t start, end;
     int arr[n];
     for (int i = 0; i < n; i++)
     {
         arr[i] = rand()%1000;
     }
     bubbleSort(arr);
+    display(arr);
     return 0;
 }
 

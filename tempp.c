@@ -1,151 +1,109 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
+#define n 20
 
-struct Node
+void display(int* arr)
 {
-    int data;
-    struct Node *right, *left;
-};
-typedef struct Node *node;
-
-node create(int data)
-{
-    node newnode;
-    newnode = malloc(sizeof(struct Node));
-    newnode->data = data;
-    newnode->left = 0;
-    newnode->right = 0;
-    return newnode;
-}
-
-node insert(node root, int data)
-{
-    if (root == 0)
-        return create(data);
-    if (data < root->data)
-        root->left = insert(root->left, data);
-    else if (data > root->data)
-        root->right = insert(root->right, data);
-    return root;
-}
-
-int search(node root, int n)
-{
-    if (root == 0)
-        return 0;
-    if (n == root->data)
-        return 1;
-    if (n < root->data)
-        return search(root->left, n);
-    else if (n > root->data)
-        return search(root->right, n);
-}
-
-void inorder(node root)
-{
-    if (root == 0)
-        return;
-    inorder(root->left);
-    printf("%d ", root->data);
-    inorder(root->right);
-}
-
-node orderpre(node root)
-{
-    root = root->left;
-    while (root->right != 0)
-        root = root->right;
-    return root;
-}
-
-node deletenode(node root, int data)
-{
-    if (root == 0)
+    for (int i = 0; i < n; i++)
     {
-        printf("does not exist\n");
-        return 0;
+        printf("%d ", *(arr+i));
     }
-
-    node ipre;
-    if (data < root->data)
-        root->left = deletenode(root->left, data);
-    else if (data > root->data)
-        root->right = deletenode(root->right, data);
-    else
-    {
-        if (root->right == 0 && root->left == 0)
-        {
-            free(root);
-            root = 0;
-        }
-        else if (root->left == 0)
-        {
-            node ptr = root;
-            root = root->right;
-            free(ptr);
-        }
-        else if (root->right == 0)
-        {
-            node ptr = root;
-            root = root->left;
-            free(ptr);
-        }
-        else
-        {
-            ipre = orderpre(root);
-            root->data = ipre->data;
-            root->left = deletenode(root->left, ipre->data);
-        }
-    }
-    return root;
 }
 
-void menu()
+void bubblesort(int* arr)
 {
-    printf("------menu-----\n");
-    printf("1.Insert\n");
-    printf("2.Search\n");
-    printf("3.Print\n");
-    printf("4.Delete\n");
-    printf("5.Exit\n");
-    printf("---------------\n");
+    int flag=0;
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if(*(arr+j+1)<*(arr+j))
+            {
+                int swap = *(arr+j);
+                *(arr+j) = *(arr+j+1);
+                *(arr+j+1) = swap;
+                flag=1;
+            }
+        }
+        if(!flag)
+        break;
+    }
 }
+
+void swap(int* arr, int i, int j)
+{
+    int temp = *(arr+i);
+    *(arr+i) = *(arr+j);
+    *(arr+j) = temp;
+}
+
+int partition(int* arr, int l, int r)
+{
+    int i, j, pivot;
+    j = l;
+    i = j - 1;
+    pivot=*(arr+r);
+    while(j<r)
+    {
+        if(*(arr+j)<pivot)
+        {
+            i++;
+            swap(arr,i,j);
+        }
+        j++;
+    }
+    swap(arr,i+1,r);
+    return i+1;
+}
+
+void quicksort(int* arr, int l, int r)
+{
+    if(l<r)
+    {
+        int pi = partition(arr,l,r);
+        quicksort(arr,l,pi-1);
+        quicksort(arr,pi+1,r);
+    }
+}
+
+void merge(int* arr, int l, int m, int r)
+{
+
+}
+
+void mergesort(int *arr, int l, int r)
+{
+    
+}
+
+/*
+void insertionSort1(int n, int* arr) {
+    int j, temp;
+    j = n-1;
+    temp = *(arr+j);
+    while(temp<*(arr+j-1))
+    {
+        *(arr+j)=*(arr+j-1);
+        j--;
+    }
+    *(arr+j)=temp;
+    display(arr, n);
+}
+
+*/
 
 int main()
 {
-    node root = 0;
-    int choice, n, f = 0;
-    while (1)
+    int *arr;
+    arr = (int*)malloc(sizeof(int));
+    for (int i = 0; i < n; i++)
     {
-        menu();
-        scanf("%d", &choice);
-        switch (choice)
-        {
-        case 1:
-            printf("Enter data\n");
-            scanf("%d", &n);
-            root = insert(root, n);
-            break;
-        case 2:
-            printf("enter element to be searched\n");
-            scanf("%d", &n);
-            f = search(root, n);
-            if (f == 1)
-                printf("yes\n");
-            else
-                printf("No\n");
-            break;
-        case 3:
-            inorder(root);
-            printf("\n");
-            break;
-        case 4:
-            printf("Enter element to be deleted\n");
-            scanf("%d", &n);
-            root = deletenode(root, n);
-            break;
-        case 5:
-            exit(0);
-        }
+        *(arr+i)=rand();
     }
+    // bubblesort(arr);
+    // quicksort(arr,0,n-1);
+    megresort(arr,0,n-1);
+    display(arr);    
+    
+    return 0;
 }

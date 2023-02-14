@@ -32,7 +32,7 @@ int partition(int arr[10], int l, int r)
     }
     swap(arr,i+1,r);
     return i+1;
-}
+} 
 
 void quickSort(int arr[10], int l, int r)
 {

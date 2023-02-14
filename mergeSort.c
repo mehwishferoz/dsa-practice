@@ -1,7 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<time.h>
-#define n 100000
 
 void merge(int arr[10], int l, int m, int r)
 {
@@ -72,14 +70,8 @@ int main()
     {
         arr[i] = rand()%1000;
     }
-    clock_t start, end;
-    start = clock();
     mergesort(arr, 0, n - 1);
-    end = clock();
-    double duration = ((double)(end - start)/CLOCKS_PER_SEC);
-    printf("Time: %g", duration);
-    // display(arr);
-
+    display(arr);
     return 0;
 }
 

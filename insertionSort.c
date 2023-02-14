@@ -21,7 +21,7 @@ void display(int A[10])
     {
         printf("%d ", A[i]);
     }
-}
+} 
 
 int main()
 {

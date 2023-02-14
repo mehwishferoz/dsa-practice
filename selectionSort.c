@@ -1,7 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<time.h>
-#define n 90000
 
 void display(int arr[10])
 {
@@ -13,9 +11,6 @@ void display(int arr[10])
 
 void selectionSort(int arr[10])
 {
-    
-    clock_t start, end;
-    start = clock();
     for(int i=0;i<n-1;i++)
     {
         for(int j=i+1;j<n;j++)
@@ -28,9 +23,6 @@ void selectionSort(int arr[10])
             }
         }
     }
-    end = clock();
-    double duration = ((double)(end - start)/CLOCKS_PER_SEC);
-    printf("Time: %g", duration);
 }
 
 int main()
@@ -41,7 +33,7 @@ int main()
         arr[i] = rand()%1000;
     }
     selectionSort(arr);
-    // display(arr,n);
+    display(arr,n);
 
     return 0;
 }
