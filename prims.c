@@ -2,6 +2,7 @@
 
 #include<stdio.h>
 #include<stdbool.h> 
+#include<string.h>
 
 #define INF 9999999
 
@@ -53,11 +54,16 @@ int main() {
     x = 0;
     y = 0;
 
-    for (int i = 0; i < V; i++) {
-      if (selected[i]) {
-        for (int j = 0; j < V; j++) {
-          if (!selected[j] && G[i][j]) {  // not in selected and there is an edge
-            if (min > G[i][j]) {
+    for (int i = 0; i < V; i++) 
+    {
+      if (selected[i]) 
+      {
+        for (int j = 0; j < V; j++) 
+        {
+          if (!selected[j] && G[i][j]) 
+          {  // not in selected and there is an edge
+            if (min > G[i][j]) 
+            {
               min = G[i][j];
               x = i;
               y = j;
@@ -73,3 +79,4 @@ int main() {
 
   return 0;
 }
+

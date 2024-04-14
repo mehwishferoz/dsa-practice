@@ -99,17 +99,6 @@ node predecessor(struct node *root)
     return root;
 }
 
-int leafCount(struct node *root)
-{
-    if(!root)
-    return 0;
-    if(!root->left && !root->right)
-    return 1;
-
-    else
-    return leafcount(root->left) + leafcount(root->right);
-}
-
 int Max(struct node *root)
 {
     if(!root->right)
@@ -126,12 +115,20 @@ int Min(struct node *root)
     Min(root->left);
 }
 
-
+int leafcount(struct node *root)
+{
+    if(!root)
+    return 0;
+    else if(!root->left && !root->right)
+    return 1;
+    else 
+    return leafCount(root->left) + leafCount(root->right);
+}
 
 int main()
 {
     struct node *root = NULL;
-
+    
 
     return 0;
 }

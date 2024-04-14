@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 void display(int arr[10])
 {
@@ -17,8 +18,10 @@ void swap(int arr[10], int i, int j)
 
 int partition(int arr[10], int l, int r)
 {
-    int i, j, pivot;
-    pivot = arr[r];
+    int i, j, pivot, index;
+    index = (rand() % (r - l + 1) + l);
+    pivot = arr[index];
+    swap(arr,index,r);
     j = l;
     i = j - 1;
     while(j<r)

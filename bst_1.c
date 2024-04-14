@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-//Search, Ceil, Floor
+//Search, Insert, Delete, Preorder
 
 struct Node
 {
@@ -15,6 +15,7 @@ struct Node *getNode(int n)
     newn->data = n;
     newn->left = NULL;
     newn->right = NULL;
+    return newn;
 }
 
 struct Node *insert(struct Node *root, int x)
@@ -29,7 +30,6 @@ struct Node *insert(struct Node *root, int x)
     root->left = insert(root->left,x);
 
     return root;
-
 }
 
 void Inorder(struct Node *root)
@@ -53,52 +53,13 @@ int search(struct Node* root, int k)
     search(root->left,k);
 }
 
-int Ceil(struct Node *root, int key2)
+struct Node* predecessor(struct Node *root)
 {
-    // smallest val >= key
-    int ceil = -1;
-    while(root)
-    {
-        if(root->data == key2)
-        {
-            ceil = root->data;
-            return ceil;
-        }
-        else
-        {
-            if(key2 > root->data)
-            root = root->right;
-            else{
-            ceil = root->data;
-            root = root->left;
-            }
-        }
-    }
-    return ceil;
-}
+    struct Node *temp=root->left;
+    while(temp->right)
+    temp=temp->right;
 
-int Floor(struct Node *root,int key3)
-{
-    // greatest val <= key
-    int floor = -1;
-    while(root)
-    {
-        if(root->data == key3)
-        {
-            floor = root->data;
-            return floor;
-        }
-        else{
-            if(root->data>key3)
-            root = root->left;
-            else
-            {
-                floor = root->data;
-                root = root->right;
-            }
-        }
-    }
-    return floor;
+    return temp;
 }
 
 struct Node* delete(struct Node *root, int d)
@@ -114,6 +75,7 @@ struct Node* delete(struct Node *root, int d)
 
     else
     {
+        struct Node* ipre;
         if(!root->left && !root->right)
         {
             free(root);
@@ -132,9 +94,12 @@ struct Node* delete(struct Node *root, int d)
             free(temp);
         }
         else{
-
+            ipre = predecessor(root);
+            root->data = ipre->data;
+            root->left = delete(root->left,d);
         }
     }
+    return root;
 }
 
 int main(){
@@ -163,19 +128,7 @@ int main(){
     printf("Not found\n");
     else
     printf("Found\n");  
-
-    int key2,key3;
-
-    printf("Enter the value whose ceiling value is to be found: \n");
-    scanf("%d", &key2);  
-    int c = Ceil(root,key2);
-    printf("The ceiling value of %d is %d\n", key2, c);
     
-    printf("Enter the value whose floor value is to be found: \n");
-    scanf("%d", &key3);  
-    int f = Floor(root,key3);
-    printf("The floor value of %d is %d\n", key3, f);
-
     int d;
     printf("Enter the element you wish to delete: \n");
     scanf("%d", &d);

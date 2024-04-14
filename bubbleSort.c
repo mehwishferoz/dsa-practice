@@ -60,7 +60,6 @@ Auxiliary Space - O(1)
 
 Bubble sort is:
     - in-place (does'nt use any other major data structure)
-    - unstable (elements with the same key value may not retain their relative order)
+    - stable (elements with the same key value retain their relative order)
     - adaptive (if flag is used)
-
 */

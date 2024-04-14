@@ -220,7 +220,7 @@ void menu()
     printf("12.Count the number of nodes present at level 1 of the tree\n");
     printf("13.Implement the insert_into_bst function using recursion\n");
     printf("14.Count and print the number of leaf nodes present in the tree\n");
-    printf("15.Find the memory occupied by the tree in terms of bytes\n");
+    // printf("15.Find the memory occupied by the tree in terms of bytes\n");
     printf("16.Find the number of edges between the root node and the largest element in the tree\n");
     printf("17.Print the total out-degree of all the leaf nodes\n");
     // printf("18.Find and delete all the duplicate nodes from the tree\n");
@@ -322,11 +322,11 @@ int main()
             printf("\nNumber of leaf nodes=%d", ln);
             break;
 
-        case 15:
-            char* bytes1 = (char*)malloc(sizeof(struct Node));
-            char* bytes2 = (char*)malloc(sizeof(root));
-            printf("%u bytes is the memory used by the tree\n", (bytes2) - (bytes1));
-            break;
+        // case 15:
+        //     char* bytes1 = (char*)malloc(sizeof(struct Node));
+        //     char* bytes2 = (char*)malloc(sizeof(root));
+        //     printf("%u bytes is the memory used by the tree\n", (bytes2) - (bytes1));
+        //     break;
 
         case 16:
             count = 0;
